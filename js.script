@@ -23,7 +23,7 @@ const questionPairs = [
 
 const state = {
   players: [],
-  timerSeconds: 30,
+  timerSeconds: 0,
   imposter: "",
   currentQuestionIndex: 0,
   answers: {},
@@ -262,7 +262,7 @@ function resetGame() {
   state.currentQuestionIndex = 0;
   state.questionPair = [];
   playerNameInput.value = "";
-  timerValueInput.value = "30";
+  timerValueInput.value = "";
   timerUnitSelect.value = "seconds";
   renderPlayers();
 
