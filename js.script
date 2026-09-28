@@ -19,6 +19,114 @@ const questionPairs = [
     "What is the most useful skill to have?",
     "What is the least useful skill to have?",
   ],
+  [
+    "What's the most useful app you use every day?",
+    "What's the most distracting app you use every day?",
+  ],
+  [
+    "What's the best memory you have?",
+    "What's the worst memory you have?",
+  ],
+  [
+    "What's your favourite day of the week?",
+    "What's your least favourite day of the week?",
+  ],
+  [
+    "What's the best thing to do on a rainy day?",
+    "What's the worst thing to do on a rainy day?",
+  ],
+  [
+    "What is the most valuable thing in your life?",
+    "What is the least valuable thing in your life?",
+  ],
+  [
+    "What's the best way to spend a Sunday?",
+    "What's the worst way to spend a Sunday?",
+  ],
+  [
+    "What is the most fun thing you can do with friends?",
+    "What is the most boring thing you can do with friends?",
+  ],
+  [
+    "What's the easiest thing to do?",
+    "What's the hardest thing to do?",
+  ],
+  [
+    "What's the most relaxing place to be?",
+    "What's the most stressful place to be?",
+  ],
+  [
+    "What's the best thing to have in a backpack?",
+    "What's the worst thing to have in a backpack?",
+  ],
+  [
+    "What's the best snack ever?",
+    "What's the worst snack ever?",
+  ],
+  [
+    "What is the best thing to watch?",
+    "What is the worst thing to watch?",
+  ],
+  [
+    "What's the best song to play at a party?",
+    "What's the worst song to play at a party?",
+  ],
+  [
+    "What's the best time of day?",
+    "What's the worst time of day?",
+  ],
+  [
+    "What's the most useful item in a house?",
+    "What's the least useful item in a house?",
+  ],
+  [
+    "What's the best thing to do when you're bored?",
+    "What's the worst thing to do when you're bored?",
+  ],
+  [
+    "What is the most impressive talent someone can have?",
+    "What is the least impressive talent someone can have?",
+  ],
+  [
+    "What's the best place to travel to?",
+    "What's the worst place to travel to?",
+  ],
+  [
+    "What's the best thing to eat before a workout?",
+    "What's the worst thing to eat before a workout?",
+  ],
+  [
+    "What's the best gift to receive?",
+    "What's the worst gift to receive?",
+  ],
+  [
+    "What's the most trustworthy animal?",
+    "What's the least trustworthy animal?",
+  ],
+  [
+    "What's the best thing to do at night?",
+    "What's the worst thing to do at night?",
+  ],
+  [
+    "What's the best school subject?",
+    "What's the worst school subject?",
+  ],
+  [
+    "What's the most exciting sport?",
+    "What's the least exciting sport?",
+  ],
+  [
+    "What's the best way to spend £100?",
+    "What's the worst way to spend £100?",
+  ],
+  [
+    "What's the best thing to do on a holiday?",
+    "What's the worst thing to do on a holiday?",
+  ],
+  [
+    "What is the most useful skill for everyday life?",
+    "What is the least useful skill for everyday life?",
+  ],
 ];
 
 const state = {
@@ -30,6 +138,7 @@ const state = {
   votes: {},
   questionPair: [],
   timerId: null,
+  usedQuestions: [],
 };
 
 const setupScreen = document.getElementById("setup-screen");
@@ -146,6 +255,19 @@ function renderCurrentPlayer() {
   startTimer(state.timerSeconds);
 }
 
+function getRandomQuestionPair() {
+  let availableQuestions = questionPairs.filter((pair) => !state.usedQuestions.includes(pair[0]));
+
+  if (availableQuestions.length === 0) {
+    availableQuestions = [...questionPairs];
+    state.usedQuestions = [];
+  }
+
+  const chosenPair = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+  state.usedQuestions.push(chosenPair[0]);
+  return chosenPair;
+}
+
 function startGame() {
   if (state.players.length < 2) {
     alert("Please add at least 2 players.");
@@ -159,7 +281,7 @@ function startGame() {
 
   state.timerSeconds = timerSeconds;
   state.imposter = state.players[Math.floor(Math.random() * state.players.length)];
-  state.questionPair = questionPairs[Math.floor(Math.random() * questionPairs.length)];
+  state.questionPair = getRandomQuestionPair();
   state.currentQuestionIndex = 0;
   state.answers = {};
   state.votes = {};
@@ -255,7 +377,6 @@ function showResults() {
 
 function resetGame() {
   clearInterval(state.timerId);
-  state.players = [];
   state.answers = {};
   state.votes = {};
   state.imposter = "";
@@ -264,10 +385,23 @@ function resetGame() {
   playerNameInput.value = "";
   timerValueInput.value = "";
   timerUnitSelect.value = "seconds";
-  renderPlayers();
 
   resultsScreen.classList.add("hidden");
   setupScreen.classList.remove("hidden");
+}
+
+function nextRound() {
+  clearInterval(state.timerId);
+  state.currentQuestionIndex = 0;
+  state.answers = {};
+  state.votes = {};
+  state.imposter = state.players[Math.floor(Math.random() * state.players.length)];
+  state.questionPair = getRandomQuestionPair();
+
+  secretImposter.textContent = state.imposter;
+  resultsScreen.classList.add("hidden");
+  answerScreen.classList.remove("hidden");
+  renderCurrentPlayer();
 }
 
 document.getElementById("add-player-btn").addEventListener("click", addPlayer);
@@ -275,7 +409,7 @@ document.getElementById("start-game-btn").addEventListener("click", startGame);
 document.getElementById("submit-answer-btn").addEventListener("click", () => submitAnswer(false));
 document.getElementById("start-voting-btn").addEventListener("click", showVoteScreen);
 document.getElementById("submit-votes-btn").addEventListener("click", submitVotes);
-document.getElementById("new-round-btn").addEventListener("click", resetGame);
+document.getElementById("new-round-btn").addEventListener("click", nextRound);
 playerNameInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     addPlayer();
