@@ -1,131 +1,131 @@
 const questionPairs = [
   [
-    "What's the fastest thing you can do?",
-    "What's the slowest thing you can do?",
+    "What is something you could do in 10 minutes that feels surprisingly productive?",
+    "What is something you could do in 10 minutes that feels completely pointless?",
   ],
   [
-    "What's the most exciting thing you've ever done?",
-    "What's the least exciting thing you've ever done?",
+    "What's a trip you would love to take someday?",
+    "What's a trip you would never want to take again?",
   ],
   [
-    "What would you do with 1 million dollars in one day?",
-    "What would you do with 1 million dollars in the worst possible way?",
+    "What would you do with 1 million dollars if you had to keep it fun and simple?",
+    "What would you do with 1 million dollars if you wanted to make the biggest mess of it?",
   ],
   [
-    "What's the best food you can eat right now?",
-    "What's the worst food you can eat right now?",
+    "What is your go-to comfort food?",
+    "What food would you never eat again if someone paid you?",
   ],
   [
-    "What is the most useful skill to have?",
-    "What is the least useful skill to have?",
+    "What skill would make life easier for you?",
+    "What skill would make you instantly more annoying to be around?",
   ],
   [
-    "What's the most useful app you use every day?",
-    "What's the most distracting app you use every day?",
+    "What's an app you use every day without thinking?",
+    "What's an app that always wastes your time when you open it?",
   ],
   [
-    "What's the best memory you have?",
-    "What's the worst memory you have?",
+    "What's a memory you still replay in your head?",
+    "What's a memory you wish you could delete from your brain?",
   ],
   [
-    "What's your favourite day of the week?",
-    "What's your least favourite day of the week?",
+    "What's your perfect weekend plan?",
+    "What's your least favourite kind of weekend?",
   ],
   [
-    "What's the best thing to do on a rainy day?",
-    "What's the worst thing to do on a rainy day?",
+    "What is the best way to spend a rainy afternoon?",
+    "What is the most annoying thing to do on a rainy afternoon?",
   ],
   [
-    "What is the most valuable thing in your life?",
-    "What is the least valuable thing in your life?",
+    "What is one thing you never want to lose?",
+    "What is one thing you would happily throw away?",
   ],
   [
-    "What's the best way to spend a Sunday?",
-    "What's the worst way to spend a Sunday?",
+    "What's the best way to spend a Sunday morning?",
+    "What's the most chaotic way to spend a Sunday morning?",
   ],
   [
-    "What is the most fun thing you can do with friends?",
-    "What is the most boring thing you can do with friends?",
+    "What is the most fun thing to do with friends?",
+    "What is the most awkward thing to do with friends?",
   ],
   [
-    "What's the easiest thing to do?",
-    "What's the hardest thing to do?",
+    "What's the easiest thing you can do without effort?",
+    "What's something that feels impossible to get right?",
   ],
   [
-    "What's the most relaxing place to be?",
-    "What's the most stressful place to be?",
+    "What's a place that always relaxes you?",
+    "What's a place that makes you feel instantly tense?",
   ],
   [
-    "What's the best thing to have in a backpack?",
-    "What's the worst thing to have in a backpack?",
+    "What is the most useful thing to carry in a backpack?",
+    "What is the most annoying thing to carry in a backpack?",
   ],
   [
-    "What's the best snack ever?",
-    "What's the worst snack ever?",
+    "What's a snack you would happily eat every day?",
+    "What's a snack that would ruin your mood instantly?",
   ],
   [
-    "What is the best thing to watch?",
-    "What is the worst thing to watch?",
+    "What is something you can watch forever?",
+    "What is something you would turn off immediately?",
   ],
   [
-    "What's the best song to play at a party?",
-    "What's the worst song to play at a party?",
+    "What's the song you would play to lift the mood?",
+    "What's the song that would kill the vibe instantly?",
   ],
   [
-    "What's the best time of day?",
-    "What's the worst time of day?",
+    "What time of day do you feel most alive?",
+    "What time of day do you feel nothing but tired?",
   ],
   [
     "What's the most useful item in a house?",
-    "What's the least useful item in a house?",
+    "What's the most pointless item in a house?",
   ],
   [
-    "What's the best thing to do when you're bored?",
-    "What's the worst thing to do when you're bored?",
+    "What is the best way to spend a boring afternoon?",
+    "What is the worst way to spend a boring afternoon?",
   ],
   [
-    "What is the most impressive talent someone can have?",
-    "What is the least impressive talent someone can have?",
+    "What talent would impress most people?",
+    "What talent sounds impressive but would annoy everyone?",
   ],
   [
-    "What's the best place to travel to?",
-    "What's the worst place to travel to?",
+    "What is the best place to be on a weekday?",
+    "What is the worst place to be on a weekday?",
   ],
   [
     "What's the best thing to eat before a workout?",
-    "What's the worst thing to eat before a workout?",
+    "What's the weirdest thing you would never eat before a workout?",
   ],
   [
-    "What's the best gift to receive?",
-    "What's the worst gift to receive?",
+    "What gift would make you feel instantly happy?",
+    "What gift would make you feel deeply uncomfortable?",
   ],
   [
-    "What's the most trustworthy animal?",
-    "What's the least trustworthy animal?",
+    "What's an animal you trust instantly?",
+    "What's an animal you would never trust in a dark alley?",
   ],
   [
-    "What's the best thing to do at night?",
-    "What's the worst thing to do at night?",
+    "What is the best way to spend a late evening?",
+    "What is the worst kind of late evening?",
   ],
   [
-    "What's the best school subject?",
-    "What's the worst school subject?",
+    "What school subject do you think is genuinely useful?",
+    "What school subject do you think should be banned forever?",
   ],
   [
-    "What's the most exciting sport?",
-    "What's the least exciting sport?",
+    "What's the most fun sport to play casually?",
+    "What's the sport you'd avoid unless forced?",
   ],
   [
-    "What's the best way to spend £100?",
-    "What's the worst way to spend £100?",
+    "What is the best way to spend £100 on a good day?",
+    "What is the worst way to waste £100 on a bad day?",
   ],
   [
-    "What's the best thing to do on a holiday?",
-    "What's the worst thing to do on a holiday?",
+    "What's the best thing to do on holiday?",
+    "What's the most exhausting thing to do on holiday?",
   ],
   [
-    "What is the most useful skill for everyday life?",
-    "What is the least useful skill for everyday life?",
+    "What skill would help you in everyday life most?",
+    "What skill sounds impressive but would not help you at all?",
   ],
 ];
 
@@ -137,6 +137,7 @@ const state = {
   answers: {},
   votes: {},
   questionPair: [],
+  questionOrder: [0, 1],
   timerId: null,
   usedQuestions: [],
 };
@@ -201,11 +202,14 @@ function parseTimer() {
 }
 
 function getQuestionForPlayer(playerName) {
+  const imposterQuestionIndex = state.questionOrder[0];
+  const regularQuestionIndex = state.questionOrder[1];
+
   if (playerName === state.imposter) {
-    return state.questionPair[1];
+    return state.questionPair[imposterQuestionIndex];
   }
 
-  return state.questionPair[0];
+  return state.questionPair[regularQuestionIndex];
 }
 
 function startTimer(seconds) {
@@ -282,6 +286,7 @@ function startGame() {
   state.timerSeconds = timerSeconds;
   state.imposter = state.players[Math.floor(Math.random() * state.players.length)];
   state.questionPair = getRandomQuestionPair();
+  state.questionOrder = Math.random() < 0.5 ? [0, 1] : [1, 0];
   state.currentQuestionIndex = 0;
   state.answers = {};
   state.votes = {};
@@ -397,6 +402,7 @@ function nextRound() {
   state.votes = {};
   state.imposter = state.players[Math.floor(Math.random() * state.players.length)];
   state.questionPair = getRandomQuestionPair();
+  state.questionOrder = Math.random() < 0.5 ? [0, 1] : [1, 0];
 
   secretImposter.textContent = state.imposter;
   resultsScreen.classList.add("hidden");
