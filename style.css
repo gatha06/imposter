@@ -1,17 +1,17 @@
 :root {
-  --bg: #fffaf9;
-  --bg-soft: #f8f3ff;
+  --bg: #f3f5f8;
+  --bg-soft: #edf1f6;
   --panel: #ffffff;
-  --panel-alt: #fffdf7;
-  --text: #3d3751;
-  --muted: #6e6785;
-  --primary: #c7b8ff;
-  --primary-dark: #b79afc;
-  --accent: #b9f5d4;
-  --danger: #f7bfd4;
-  --warning: #f9d97a;
-  --border: rgba(182, 154, 252, 0.18);
-  --shadow: rgba(119, 115, 160, 0.12);
+  --panel-alt: #f9fafb;
+  --text: #1f2937;
+  --muted: #4b5563;
+  --primary: #5b6ee1;
+  --primary-dark: #4457c9;
+  --accent: #2bb673;
+  --danger: #e05c75;
+  --warning: #d99a2a;
+  --border: rgba(31, 41, 55, 0.12);
+  --shadow: rgba(15, 23, 42, 0.08);
 }
 
 * {
@@ -22,7 +22,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(135deg, #fff2f4, #f4efff 30%, #eefbf7 65%, #fffaf0);
+  background: linear-gradient(135deg, #eef2ff, #f7f7fb 38%, #edf6f2 100%);
   color: var(--text);
 }
 
@@ -108,24 +108,24 @@ textarea {
 }
 
 .player-list li {
-  background: rgba(217, 200, 255, 0.32);
-  border: 1px solid rgba(183, 154, 252, 0.28);
+  background: rgba(91, 110, 225, 0.10);
+  border: 1px solid rgba(91, 110, 225, 0.18);
   border-radius: 999px;
   padding: 8px 14px;
   font-weight: 600;
-  color: #4e426c;
+  color: #2f3d7a;
 }
 
 .primary-btn {
   border: none;
-  background: linear-gradient(135deg, #d9c8ff, #f8bfd8);
-  color: #3a2d54;
+  background: linear-gradient(135deg, #6d7ae8, #4a5ad8);
+  color: #ffffff;
   padding: 12px 18px;
   border-radius: 12px;
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s ease, opacity 0.2s ease;
-  box-shadow: 0 8px 18px rgba(197, 174, 255, 0.30);
+  box-shadow: 0 8px 18px rgba(93, 110, 225, 0.25);
 }
 
 .primary-btn:hover {
@@ -156,8 +156,8 @@ textarea {
 }
 
 .question-card {
-  background: linear-gradient(135deg, rgba(185, 245, 212, 0.42), rgba(217, 200, 255, 0.32));
-  border: 1px solid rgba(166, 229, 192, 0.55);
+  background: linear-gradient(135deg, rgba(43, 182, 115, 0.10), rgba(91, 110, 225, 0.08));
+  border: 1px solid rgba(43, 182, 115, 0.22);
   border-radius: 14px;
   padding: 20px;
   margin-bottom: 18px;
@@ -192,8 +192,8 @@ textarea {
 .answer-card,
 .result-card,
 .vote-item {
-  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(249, 244, 255, 0.96));
-  border: 1px solid rgba(196, 181, 253, 0.22);
+  background: linear-gradient(135deg, #ffffff, #f9fafb);
+  border: 1px solid rgba(31, 41, 55, 0.08);
   border-radius: 12px;
   padding: 16px;
 }
