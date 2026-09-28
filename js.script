@@ -1,0 +1,285 @@
+const questionPairs = [
+  [
+    "What's the fastest thing you can do?",
+    "What's the slowest thing you can do?",
+  ],
+  [
+    "What's the most exciting thing you've ever done?",
+    "What's the least exciting thing you've ever done?",
+  ],
+  [
+    "What would you do with 1 million dollars in one day?",
+    "What would you do with 1 million dollars in the worst possible way?",
+  ],
+  [
+    "What's the best food you can eat right now?",
+    "What's the worst food you can eat right now?",
+  ],
+  [
+    "What is the most useful skill to have?",
+    "What is the least useful skill to have?",
+  ],
+];
+
+const state = {
+  players: [],
+  timerSeconds: 30,
+  imposter: "",
+  currentQuestionIndex: 0,
+  answers: {},
+  votes: {},
+  questionPair: [],
+  timerId: null,
+};
+
+const setupScreen = document.getElementById("setup-screen");
+const answerScreen = document.getElementById("answer-screen");
+const revealScreen = document.getElementById("reveal-screen");
+const voteScreen = document.getElementById("vote-screen");
+const resultsScreen = document.getElementById("results-screen");
+
+const timerValueInput = document.getElementById("timer-value");
+const timerUnitSelect = document.getElementById("timer-unit");
+const playerNameInput = document.getElementById("player-name");
+const playerList = document.getElementById("player-list");
+const secretImposter = document.getElementById("secret-imposter");
+const currentPlayerName = document.getElementById("current-player-name");
+const currentQuestion = document.getElementById("current-question");
+const answerInput = document.getElementById("answer-input");
+const answerTimer = document.getElementById("answer-timer");
+const answersList = document.getElementById("answers-list");
+const voteForm = document.getElementById("vote-form");
+const resultsList = document.getElementById("results-list");
+
+function renderPlayers() {
+  playerList.innerHTML = "";
+
+  state.players.forEach((player) => {
+    const item = document.createElement("li");
+    item.textContent = player;
+    playerList.appendChild(item);
+  });
+}
+
+function addPlayer() {
+  const name = playerNameInput.value.trim();
+
+  if (!name) {
+    alert("Please enter a player name.");
+    return;
+  }
+
+  if (state.players.includes(name)) {
+    alert("That player name already exists.");
+    return;
+  }
+
+  state.players.push(name);
+  playerNameInput.value = "";
+  renderPlayers();
+}
+
+function parseTimer() {
+  const value = Number(timerValueInput.value);
+  const unit = timerUnitSelect.value;
+
+  if (!value || value <= 0) {
+    alert("Please enter a valid timer value.");
+    return null;
+  }
+
+  return unit === "minutes" ? value * 60 : value;
+}
+
+function getQuestionForPlayer(playerName) {
+  if (playerName === state.imposter) {
+    return state.questionPair[1];
+  }
+
+  return state.questionPair[0];
+}
+
+function startTimer(seconds) {
+  clearInterval(state.timerId);
+
+  let remaining = seconds;
+  answerTimer.textContent = `${remaining}s`;
+
+  state.timerId = setInterval(() => {
+    remaining -= 1;
+
+    if (remaining <= 0) {
+      clearInterval(state.timerId);
+      answerTimer.textContent = "0s";
+      submitAnswer(true);
+      return;
+    }
+
+    answerTimer.textContent = `${remaining}s`;
+  }, 1000);
+}
+
+function submitAnswer(forceTimeout = false) {
+  const currentPlayer = state.players[state.currentQuestionIndex];
+  const answerValue = forceTimeout ? "TIME UP" : answerInput.value.trim() || "TIME UP";
+
+  state.answers[currentPlayer] = answerValue;
+
+  state.currentQuestionIndex += 1;
+
+  if (state.currentQuestionIndex < state.players.length) {
+    renderCurrentPlayer();
+    return;
+  }
+
+  clearInterval(state.timerId);
+  showRevealScreen();
+}
+
+function renderCurrentPlayer() {
+  const playerName = state.players[state.currentQuestionIndex];
+  const question = getQuestionForPlayer(playerName);
+
+  currentPlayerName.textContent = playerName;
+  currentQuestion.textContent = question;
+  answerInput.value = "";
+  startTimer(state.timerSeconds);
+}
+
+function startGame() {
+  if (state.players.length < 2) {
+    alert("Please add at least 2 players.");
+    return;
+  }
+
+  const timerSeconds = parseTimer();
+  if (timerSeconds === null) {
+    return;
+  }
+
+  state.timerSeconds = timerSeconds;
+  state.imposter = state.players[Math.floor(Math.random() * state.players.length)];
+  state.questionPair = questionPairs[Math.floor(Math.random() * questionPairs.length)];
+  state.currentQuestionIndex = 0;
+  state.answers = {};
+  state.votes = {};
+
+  secretImposter.textContent = state.imposter;
+  setupScreen.classList.add("hidden");
+  answerScreen.classList.remove("hidden");
+  renderCurrentPlayer();
+}
+
+function showRevealScreen() {
+  answerScreen.classList.add("hidden");
+  revealScreen.classList.remove("hidden");
+
+  answersList.innerHTML = "";
+
+  state.players.forEach((player) => {
+    const card = document.createElement("div");
+    card.className = "answer-card";
+    card.innerHTML = `
+      <h4>${player}</h4>
+      <p>${state.answers[player] || "TIME UP"}</p>
+    `;
+    answersList.appendChild(card);
+  });
+}
+
+function showVoteScreen() {
+  revealScreen.classList.add("hidden");
+  voteScreen.classList.remove("hidden");
+
+  voteForm.innerHTML = "";
+
+  state.players.forEach((player) => {
+    const item = document.createElement("div");
+    item.className = "vote-item";
+
+    const label = document.createElement("label");
+    label.textContent = `${player} votes for:`;
+
+    const select = document.createElement("select");
+    select.name = player;
+
+    state.players.forEach((option) => {
+      const optionEl = document.createElement("option");
+      optionEl.value = option;
+      optionEl.textContent = option;
+      select.appendChild(optionEl);
+    });
+
+    label.appendChild(select);
+    item.appendChild(label);
+    voteForm.appendChild(item);
+  });
+}
+
+function submitVotes() {
+  const selects = [...document.querySelectorAll("#vote-form select")];
+
+  selects.forEach((select) => {
+    state.votes[select.name] = select.value;
+  });
+
+  showResults();
+}
+
+function showResults() {
+  voteScreen.classList.add("hidden");
+  resultsScreen.classList.remove("hidden");
+
+  resultsList.innerHTML = "";
+
+  state.players.forEach((player) => {
+    const guessedPlayer = state.votes[player];
+    const guessedCorrectly = guessedPlayer === state.imposter;
+    const card = document.createElement("div");
+    card.className = `result-card ${guessedCorrectly ? "correct" : "wrong"}`;
+    card.innerHTML = `
+      <h4>${player}</h4>
+      <p>${guessedCorrectly ? "Correct guess" : `Guessed ${guessedPlayer}`}</p>
+    `;
+    resultsList.appendChild(card);
+  });
+
+  const correctPlayers = state.players.filter((player) => state.votes[player] === state.imposter);
+  const resultSummary = document.createElement("p");
+  resultSummary.style.marginTop = "18px";
+  resultSummary.textContent = correctPlayers.length
+    ? `Correct guesses: ${correctPlayers.join(", ")}`
+    : "No one guessed the imposter correctly.";
+  resultsList.appendChild(resultSummary);
+}
+
+function resetGame() {
+  clearInterval(state.timerId);
+  state.players = [];
+  state.answers = {};
+  state.votes = {};
+  state.imposter = "";
+  state.currentQuestionIndex = 0;
+  state.questionPair = [];
+  playerNameInput.value = "";
+  timerValueInput.value = "30";
+  timerUnitSelect.value = "seconds";
+  renderPlayers();
+
+  resultsScreen.classList.add("hidden");
+  setupScreen.classList.remove("hidden");
+}
+
+document.getElementById("add-player-btn").addEventListener("click", addPlayer);
+document.getElementById("start-game-btn").addEventListener("click", startGame);
+document.getElementById("submit-answer-btn").addEventListener("click", () => submitAnswer(false));
+document.getElementById("start-voting-btn").addEventListener("click", showVoteScreen);
+document.getElementById("submit-votes-btn").addEventListener("click", submitVotes);
+document.getElementById("new-round-btn").addEventListener("click", resetGame);
+playerNameInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    addPlayer();
+  }
+});
+
+renderPlayers();

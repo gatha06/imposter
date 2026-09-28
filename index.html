@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imposter Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <h1>Imposter Game</h1>
+      </header>
+
+      <main>
+        <section id="setup-screen" class="panel">
+          <h2>Game setup</h2>
+
+          <div class="setup-grid">
+            <label>
+              Timer value
+              <input id="timer-value" type="number" min="1" value="30" />
+            </label>
+
+            <label>
+              Unit
+              <select id="timer-unit">
+                <option value="seconds">Seconds</option>
+                <option value="minutes">Minutes</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="player-entry">
+            <input id="player-name" type="text" placeholder="Add player name" />
+            <button id="add-player-btn" class="primary-btn">Add player</button>
+          </div>
+
+          <ul id="player-list" class="player-list"></ul>
+
+          <button id="start-game-btn" class="primary-btn wide-btn">Start game</button>
+        </section>
+
+        <section id="answer-screen" class="panel hidden">
+          <div class="host-note">
+            <strong>Secret imposter:</strong>
+            <span id="secret-imposter">-</span>
+          </div>
+
+          <div class="timer-box">
+            <span>Time left:</span>
+            <strong id="answer-timer">0s</strong>
+          </div>
+
+          <div class="question-card">
+            <p class="player-label">Current player</p>
+            <h3 id="current-player-name">Player</h3>
+            <p id="current-question">Question</p>
+          </div>
+
+          <textarea id="answer-input" rows="4" placeholder="Type your answer here..."></textarea>
+          <button id="submit-answer-btn" class="primary-btn wide-btn">Submit answer</button>
+        </section>
+
+        <section id="reveal-screen" class="panel hidden">
+          <h2>Everyone's answers</h2>
+          <div id="answers-list" class="answers-list"></div>
+          <button id="start-voting-btn" class="primary-btn wide-btn">Start voting</button>
+        </section>
+
+        <section id="vote-screen" class="panel hidden">
+          <h2>Who is the imposter?</h2>
+          <div id="vote-form" class="vote-form"></div>
+          <button id="submit-votes-btn" class="primary-btn wide-btn">Submit guesses</button>
+        </section>
+
+        <section id="results-screen" class="panel hidden">
+          <h2>Round results</h2>
+          <div id="results-list" class="results-list"></div>
+          <button id="new-round-btn" class="primary-btn wide-btn">New round</button>
+        </section>
+      </main>
+    </div>
+
+    <script src="js.script"></script>
+  </body>
+</html>
