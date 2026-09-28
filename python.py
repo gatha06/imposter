@@ -35,6 +35,28 @@ def get_question_for_player(player, imposter, question_pair):
     return question_pair[0]
 
 
+def parse_timer_input(prompt_text):
+    while True:
+        value = input(prompt_text).strip().lower()
+        try:
+            if value.endswith("m"):
+                minutes = float(value[:-1])
+                if minutes > 0:
+                    return int(minutes * 60)
+            elif value.endswith("s"):
+                seconds = float(value[:-1])
+                if seconds > 0:
+                    return int(seconds)
+            else:
+                seconds = float(value)
+                if seconds > 0:
+                    return int(seconds)
+        except ValueError:
+            pass
+
+        print("Please enter a valid time like 30s, 2m, or 45.")
+
+
 def get_answer_with_timer(player, question, seconds):
     print(f"\n{player}, answer this: {question}")
     print(f"You have {seconds} seconds to answer.")
@@ -60,33 +82,37 @@ def get_answer_with_timer(player, question, seconds):
 
 def ask_guess(players, imposter):
     print("\n--- Guess who the imposter is ---")
+    votes = {}
+
     for player in players:
-        if player == imposter:
-            continue
         while True:
             guess = input(f"{player}, who do you think is the imposter? ({', '.join(players)}): ").strip()
             if guess in players:
                 break
             print("Invalid name. Please choose one of the players.")
 
+        votes[player] = guess
+
+    print("\n--- Vote Results ---")
+    for player in players:
+        guess = votes[player]
         if guess == imposter:
             print(f"{player} guessed correctly! {imposter} was the imposter.")
         else:
             print(f"{player} guessed {guess}, but the imposter was {imposter}.")
 
+    correct_voters = [player for player, guess in votes.items() if guess == imposter]
+    if correct_voters:
+        print(f"\nCorrect guesses: {', '.join(correct_voters)}")
+    else:
+        print("\nNo one guessed the imposter correctly.")
+
 
 def main():
     print("=== Imposter Question Game ===")
-    print("Everyone answers under one shared timer, then players guess who the imposter is.")
+    print("Everyone answers under one shared timer, then all players can see answers and guess.")
 
-    while True:
-        try:
-            timer_seconds = int(input("Set the overall answer timer in seconds: ").strip())
-            if timer_seconds > 0:
-                break
-            print("Timer must be greater than 0.")
-        except ValueError:
-            print("Please enter a valid number of seconds.")
+    timer_seconds = parse_timer_input("Set the overall answer timer (example: 30s, 2m, or 45): ")
 
     player_names = []
     while True:
@@ -115,6 +141,7 @@ def main():
         role = "IMPOSTER" if player == imposter else "PLAYER"
         print(f"{player} [{role}]: {answers[player]}")
 
+    print("\nEveryone can now see the answers and guess who the imposter is.")
     ask_guess(player_names, imposter)
 
     print("\nThe imposter was:", imposter)
