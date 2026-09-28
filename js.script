@@ -4,10 +4,6 @@ const questionPairs = [
     "What's the slowest thing you've ever done on purpose?",
   ],
   [
-    "What would you do if you got free tickets to a concert tonight?",
-    "What would you do if someone gave you free tickets to a tax seminar tonight?",
-  ],
-  [
     "What's the first thing you'd do if you woke up as a celebrity for a day?",
     "What's the first thing you'd do if you woke up as a clown for a day?",
   ],
@@ -20,8 +16,8 @@ const questionPairs = [
     "What item would you leave at home on purpose if you were trying to be dramatic?",
   ],
   [
-    "What's the weirdest thing you can do with your body?",
-    "What's the weirdest thing your body has ever done without your permission?",
+    "What's the fastest chore you can do?",
+    "What's the slowest chore you can do?",
   ],
   [
     "What's your dream lazy Sunday?",
@@ -32,16 +28,12 @@ const questionPairs = [
     "What would make you instantly become the reason the party ended?",
   ],
   [
-    "What's the most ridiculous thing you'd say if you were trying to be mysterious?",
-    "What's the most ridiculous thing you'd say if you were trying to be normal?",
+    "What's the most useful app on your phone?",
+    "What's the most distracting app on your phone?",
   ],
   [
     "What is the best thing to do when you're bored at 2am?",
     "What is the worst thing to do when you're bored at 2am?",
-  ],
-  [
-    "What's the most iconic thing you could do in a supermarket?",
-    "What's the most embarrassing thing you could do in a supermarket?",
   ],
   [
     "What's the best kind of pizza topping?",
@@ -60,24 +52,16 @@ const questionPairs = [
     "If you had to be in a movie, what role would you run away from?",
   ],
   [
-    "What's the best way to spend a rainy day with friends?",
-    "What's the worst way to spend a rainy day with friends?",
+    "What's the best way to spend a day with friends?",
+    "What's the worst way to spend a day with friends?",
   ],
   [
     "What is the most impressive thing you can do in under 10 seconds?",
     "What is the most useless thing you can do in under 10 seconds?",
   ],
   [
-    "What's the most dramatic way to answer the door?",
-    "What's the least dramatic way to answer the door?",
-  ],
-  [
-    "What's your best skill that nobody asked for?",
-    "What's your worst skill that somehow got you invited to things?",
-  ],
-  [
-    "What would you do if you found a random £100 on the floor?",
-    "What would you do if you found a random £100 on the floor and immediately regretted it?",
+    "What would you do if you found money on the floor?",
+    "What would you do if you got money as gift?",
   ],
   [
     "What's the most fun thing to do at a birthday party?",
@@ -92,7 +76,7 @@ const questionPairs = [
     "What's the least believable thing you could say in 10 seconds?",
   ],
   [
-    "What is the most iconic thing to do in a group chat?",
+    "What is the best thing to do in a group chat?",
     "What is the most annoying thing to do in a group chat?",
   ],
   [
@@ -120,16 +104,8 @@ const questionPairs = [
     "What's the funniest thing you could accidentally say in front of your boss?",
   ],
   [
-    "What is the silliest way to win an argument?",
-    "What is the most useless way to win an argument?",
-  ],
-  [
     "What's the best thing to do when no one else is in the room?",
     "What's the weirdest thing to do when no one else is in the room?",
-  ],
-  [
-    "What would you do if you had to host a party with zero budget?",
-    "What would you do if you had to host a party with zero dignity?",
   ],
 ];
 
