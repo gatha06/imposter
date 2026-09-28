@@ -138,8 +138,7 @@ def main():
 
     print("\n--- Final Answers ---")
     for player in player_names:
-        role = "IMPOSTER" if player == imposter else "PLAYER"
-        print(f"{player} [{role}]: {answers[player]}")
+        print(f"{player}: {answers[player]}")
 
     print("\nEveryone can now see the answers and guess who the imposter is.")
     ask_guess(player_names, imposter)
